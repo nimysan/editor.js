@@ -344,6 +344,10 @@ export default class UI extends Module<UINodes> {
     this.readOnlyMutableListeners.on(this.nodes.redactor, 'click', (event: MouseEvent) => {
       this.redactorClicked(event);
     }, false);
+    //鼠标经过即显示tune模块
+    this.readOnlyMutableListeners.on(this.nodes.redactor, 'mouseover', (event: MouseEvent) => {
+      this.redactorClicked(event);
+    }, false);
 
     this.readOnlyMutableListeners.on(this.nodes.redactor, 'mousedown', (event: MouseEvent | TouchEvent) => {
       this.documentTouched(event);
