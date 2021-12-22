@@ -266,7 +266,19 @@ export default class UI extends Module<UINodes> {
    * Check for mobile mode and cache a result
    */
   private checkIsMobile(): void {
-    this.isMobile = window.innerWidth < 650;
+    const editorWidthOffset = this.config.editorWidthOffset;
+    const mobileWindowThresold = this.config.mobileWindowThresold || 1100;
+    let widthOffset = 0;
+
+    if (editorWidthOffset) {
+      widthOffset = editorWidthOffset.apply(0);
+    }
+    this.isMobile = (window.innerWidth - widthOffset) < mobileWindowThresold;
+    // 回归到简单的逻辑
+    this.isMobile = window.innerWidth < 1100;
+    const newLocal = ' =--- the is mobile is ' + this.isMobile + ' - ' + window.innerWidth + ' - ' + widthOffset + ' - ' + mobileWindowThresold;
+
+    console.log(newLocal);
   }
 
   /**
@@ -344,10 +356,10 @@ export default class UI extends Module<UINodes> {
     this.readOnlyMutableListeners.on(this.nodes.redactor, 'click', (event: MouseEvent) => {
       this.redactorClicked(event);
     }, false);
-    //鼠标经过即显示tune模块
-    this.readOnlyMutableListeners.on(this.nodes.redactor, 'mouseover', (event: MouseEvent) => {
-      this.redactorClicked(event);
-    }, false);
+    // 鼠标经过即显示tune图标
+    // this.readOnlyMutableListeners.on(this.nodes.redactor, 'mouseover', (event: MouseEvent) => {
+    //   this.redactorClicked(event);
+    // }, false);
 
     this.readOnlyMutableListeners.on(this.nodes.redactor, 'mousedown', (event: MouseEvent | TouchEvent) => {
       this.documentTouched(event);

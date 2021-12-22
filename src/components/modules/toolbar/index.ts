@@ -270,6 +270,9 @@ export default class Toolbar extends Module<ToolbarNodes> {
      */
     if (isMobile) {
       toolbarY = targetBlockHolder.offsetTop + blockHeight;
+      // this.nodes.wrapper.classList.add('ce-toolbar-fake-mobile');
+      // this.nodes.wrapper.classList.add('ce-toolbar--opened-fake-mobile');
+      // this.nodes.wrapper.children[0].classList.add('ce-toolbar__content-fake-mobile');
     } else {
       toolbarY = targetBlockHolder.offsetTop + blockRenderedElementPaddingTop;
     }

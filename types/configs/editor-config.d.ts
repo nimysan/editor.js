@@ -4,6 +4,8 @@ import {SanitizerConfig} from './sanitizer-config';
 import {I18nConfig} from './i18n-config';
 
 export interface EditorConfig {
+  mobileWindowThresold?: number;
+  editorWidthOffset?: Function;
   /**
    * Element where Editor will be append
    * @deprecated property will be removed in the next major release, use holder instead
