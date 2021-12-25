@@ -357,9 +357,9 @@ export default class UI extends Module<UINodes> {
       this.redactorClicked(event);
     }, false);
     // 鼠标经过即显示tune图标
-    // this.readOnlyMutableListeners.on(this.nodes.redactor, 'mouseover', (event: MouseEvent) => {
-    //   this.redactorClicked(event);
-    // }, false);
+    this.readOnlyMutableListeners.on(this.nodes.redactor, 'mouseover', (event: MouseEvent) => {
+      this.redactorClicked(event);
+    }, false);
 
     this.readOnlyMutableListeners.on(this.nodes.redactor, 'mousedown', (event: MouseEvent | TouchEvent) => {
       this.documentTouched(event);
@@ -377,6 +377,15 @@ export default class UI extends Module<UINodes> {
       this.documentClicked(event);
     }, true);
 
+    this.readOnlyMutableListeners.on(document, 'input', (event: KeyboardEvent) => {
+      const inputListener = this.config.inputListener;
+      const target = event.target as HTMLElement;
+      const currentBlock = this.Editor.BlockManager.getBlockByChildNode(target);
+
+      if (inputListener) {
+        inputListener.apply(this, [currentBlock, event]);
+      }
+    }, true);
     /**
      * Handle selection change to manipulate Inline Toolbar appearance
      */
