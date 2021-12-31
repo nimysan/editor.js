@@ -4,6 +4,7 @@ import {SanitizerConfig} from './sanitizer-config';
 import {I18nConfig} from './i18n-config';
 
 export interface EditorConfig {
+  redactorClickedAfter?: Function;
   inputListener?: Function;
   mobileWindowThresold?: number;
   editorWidthOffset?: Function;
