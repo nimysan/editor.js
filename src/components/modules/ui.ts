@@ -766,7 +766,11 @@ export default class UI extends Module<UINodes> {
     const redactorClickedAfter = this.config.redactorClickedAfter;
 
     if (redactorClickedAfter) {
-      redactorClickedAfter.apply(this, [ event ]);
+      try {
+        redactorClickedAfter.apply(this, [ event ]);
+      } catch (error) {
+        console.log('error ' + error);
+      }
     }
 
     const stopPropagation = (): void => {
